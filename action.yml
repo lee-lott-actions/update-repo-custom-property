@@ -1,0 +1,38 @@
+name: Update Repository Custom Property
+description: A GitHub Action to update a custom property for a repository using the GitHub API
+author: Louisiana Office of Technology Services
+
+inputs:
+  repo-name:
+    description: 'The name of the repository to set the custom property for'
+    required: true
+  owner:
+    description: 'The owner of the repository (user or organization)'
+    required: true
+  token:
+    description: 'GitHub token with repository admin access'
+    required: true
+  property-name:
+    description: 'The name of the custom property to set'
+    required: true
+  property-value:
+    description: 'The value to set for the custom property'
+    required: true
+
+outputs:
+  result:
+    description: 'Result of the custom property update ("success" or "failure")'
+    value: ${{ steps.action.outputs.result }}
+  error-message:
+    description: 'Error message if the custom property update fails'
+    value: ${{ steps.action.outputs.error-message }}
+
+runs:
+  using: composite
+  steps:
+    - name: Set Repository Custom Property
+      id: action
+      run: |
+        source ${{ github.action_path }}/action.sh        
+        set_custom_property "${{ inputs.repo-name }}" "${{ inputs.owner }}" "${{ inputs.token }}" "${{ inputs.property-name }}" "${{ inputs.property-value }}"
+      shell: bash
