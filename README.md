@@ -42,7 +42,7 @@ This GitHub Action sets a custom property for a specified repository using the G
        steps:
          - name: Set Custom Property
            id: set
-           uses: la-actions/update-repo-custom-property@v1
+           uses: lee-lott-actions/update-repo-custom-property@v1
            with:
              repo-name: 'my-repo'
              owner: ${{ github.repository_owner }}
