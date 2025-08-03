@@ -1,6 +1,6 @@
 name: Update Repository Custom Property
 description: A GitHub Action to update a custom property for a repository using the GitHub API
-author: Louisiana Office of Technology Services
+author: Lee Lott
 
 inputs:
   repo-name:
