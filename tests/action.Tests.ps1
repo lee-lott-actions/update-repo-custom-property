@@ -21,7 +21,6 @@ Describe "Set-CustomProperty" {
 
 	It "succeeds with HTTP 204" {
 		Mock Invoke-WebRequest {
-			# Mirror what the function checks: StatusCode 204
 			[PSCustomObject]@{ StatusCode = 204 }
 		}
 
@@ -33,24 +32,14 @@ Describe "Set-CustomProperty" {
 
 	It "fails with HTTP 403" {
 		Mock Invoke-WebRequest {
-			# Write a response body file because the function uses -OutFile and reads it for .message
-			param(
-				[string]$Uri,
-				[string]$Method,
-				[hashtable]$Headers,
-				[string]$Body,
-				[string]$OutFile
-			)
-
-			Set-Content -Path $OutFile -Value '{"message":"Forbidden"}' -Encoding utf8
 			[PSCustomObject]@{ StatusCode = 403 }
 		}
 
-		Set-CustomProperty -RepoName $RepoName -Owner $Owner -Token $Token -PropertyName "env" -PropertyValue "production"
+		Set-CustomProperty -RepoName $RepoName -Owner $Owner -Token $Token -PropertyName $PropertyName -PropertyValue $PropertyValue
 
 		$output = Get-Content $env:GITHUB_OUTPUT
 		$output | Should -Contain "result=failure"
-		$output | Should -Contain "error-message=Failed to set 'env' custom property to 'production': Forbidden"
+		$output | Should -Contain "error-message=Error: Failed to set '$PropertyName' custom property to '$PropertyValue'\. HTTP Status"
 	}
 
 	It "fails with empty repo_name" {
