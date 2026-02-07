@@ -55,7 +55,7 @@ function Set-CustomProperty {
 	else {
 		$errorMsg = "Error: Failed to set '$PropertyName' custom property to '$PropertyValue'. HTTP Status: $($response.StatusCode)"
 		Add-Content -Path $env:GITHUB_OUTPUT -Value "result=failure"
-		Add-Content -Path $env:GITHUB_OUTPUT -Value "error-message=#errorMsg"
+		Add-Content -Path $env:GITHUB_OUTPUT -Value "error-message=$errorMsg"
 		Write-Host $errorMsg
 	}
   }
