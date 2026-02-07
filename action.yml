@@ -32,7 +32,7 @@ runs:
   steps:
     - name: Set Repository Custom Property
       id: action
+      shell: pwsh
       run: |
-        source ${{ github.action_path }}/action.sh        
-        set_custom_property "${{ inputs.repo-name }}" "${{ inputs.owner }}" "${{ inputs.token }}" "${{ inputs.property-name }}" "${{ inputs.property-value }}"
-      shell: bash
+        . "${{ github.action_path }}/action.ps1"
+        Set-CustomProperty "${{ inputs.repo-name }}" "${{ inputs.owner }}" "${{ inputs.token }}" "${{ inputs.property-name }}" "${{ inputs.property-value }}"
