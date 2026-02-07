@@ -39,7 +39,7 @@ Describe "Set-CustomProperty" {
 
 		$output = Get-Content $env:GITHUB_OUTPUT
 		$output | Should -Contain "result=failure"
-		$output | Should -Contain "error-message=Error: Failed to set '$PropertyName' custom property to '$PropertyValue'\. HTTP Status"
+		$output | Should -Contain "error-message=Error: Failed to set '$PropertyName' custom property to '$PropertyValue'. HTTP Status"
 	}
 
 	It "fails with empty repo_name" {
