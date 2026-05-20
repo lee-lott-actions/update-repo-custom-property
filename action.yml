@@ -35,4 +35,9 @@ runs:
       shell: pwsh
       run: |
         . "${{ github.action_path }}/action.ps1"
-        Set-CustomProperty "${{ inputs.repo-name }}" "${{ inputs.owner }}" "${{ inputs.token }}" "${{ inputs.property-name }}" "${{ inputs.property-value }}"
+        Set-CustomProperty `
+          -RepoName "${{ inputs.repo-name }}" `
+          -Owner "${{ inputs.owner }}" `
+          -Token "${{ inputs.token }}" `
+          -PropertyName "${{ inputs.property-name }}" `
+          -PropertyValue "${{ inputs.property-value }}"
