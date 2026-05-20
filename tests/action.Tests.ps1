@@ -4,7 +4,8 @@ Describe "Set-CustomProperty" {
 		$script:Owner = "test-owner"
 		$script:Token = "fake-token"
 		$script:PropertyName = "env"
-		$script:PropertyValue = "production"	
+		$script:PropertyValue = "production"
+		$script:MockApiUrl  = "http://127.0.0.1:3000"
 		. "$PSScriptRoot/../action.ps1"
 	}
 	
